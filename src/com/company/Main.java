@@ -19,6 +19,7 @@ public class Main {
 
         while (true) {
             Scanner scanner = new Scanner(System.in);
+            Scanner sc = new Scanner(System.in); // for STRING
 
             System.out.println("======================================================================= ");
             System.out.println("Press 1 to work with TRANSPORT table // Press 2 to work with ROUTE table ");
@@ -29,7 +30,7 @@ public class Main {
             switch (choise){
                 case 1: {
                     System.out.println("======================================================================= ");
-                    System.out.println("Press 1 to search through TRANSPORT // Press 2 to output all TRANSPORT // Press 3 to delete TRANSPORT by ID ");
+                    System.out.println("Press 1 to search through TRANSPORT // Press 2 to output all TRANSPORT\nPress 3 to delete TRANSPORT by ID // Press 4 to update one row in TRANSPORT ");
                     int choiseTransport = scanner.nextInt();
 
                     //In this switch we work with TRANSPORT table
@@ -54,12 +55,39 @@ public class Main {
                             runDefault = true;
                             break;
                         }
+                        case 4: {
+                            System.out.println("Please, input Transport ID you want to update: ");
+                            Integer transportIDUpdate = scanner.nextInt();
+                            System.out.println("Please, press 2 if you want to update TYPE of the TRANSPORT or press 3 to update MODEL of the TRANSPORT: ");
+                            Integer rowNumber = scanner.nextInt();
+                            if (rowNumber == 2){
+                                System.out.println("Please, enter new transport TYPE: ");
+                                String userInput = sc.nextLine();
+                                transportConsoleOutput.updateTransportByID(transportIDUpdate, userInput, rowNumber);
+                                runDefault = true;
+                                break;
+                            }
+                            if (rowNumber == 3){
+                                System.out.println("Please, enter new transport MODEL: ");
+                                String userInput = sc.nextLine();
+                                transportConsoleOutput.updateTransportByID(transportIDUpdate, userInput, rowNumber);
+                                runDefault = true;
+                                break;
+                            }
+                            if (rowNumber != 2 && rowNumber != 3){
+                                System.out.println("Your input is incorrect ");
+                                runDefault = true;
+                                break;
+                            }
+
+                            break;
+                        }
                     }
                     break;
                 }
                 case 2: {
                     System.out.println("======================================================================= ");
-                    System.out.println("Press 1 to search through ROUTE // Press 2 to output all ROUTES // Press 3 to delete ROUTE by ID ");
+                    System.out.println("Press 1 to search through ROUTE // Press 2 to output all ROUTES\nPress 3 to delete ROUTE by ID // Press 4 to update one row in ROUTE ");
                     int choiseRoute = scanner.nextInt();
                     switch (choiseRoute){
                         case 1: {
@@ -80,6 +108,33 @@ public class Main {
                             Integer routeIDDelete = scanner.nextInt();
                             routeConsoleOutput.deleteRouteByID(routeIDDelete);
                             runDefault = true;
+                            break;
+                        }
+                        case 4: {
+                            System.out.println("Please, input Route ID you want to update: ");
+                            Integer routeIDUpdate = scanner.nextInt();
+                            System.out.println("Please, press 2 if you want to update START of the ROUTE or press 3 to update FINISH of the ROUTE: ");
+                            Integer rowNumber = scanner.nextInt();
+                            if (rowNumber == 2){
+                                System.out.println("Please, enter new transport START: ");
+                                String userInput = sc.nextLine();
+                                transportConsoleOutput.updateTransportByID(routeIDUpdate, userInput, rowNumber);
+                                runDefault = true;
+                                break;
+                            }
+                            if (rowNumber == 3){
+                                System.out.println("Please, enter new transport FINISH: ");
+                                String userInput = sc.nextLine();
+                                transportConsoleOutput.updateTransportByID(routeIDUpdate, userInput, rowNumber);
+                                runDefault = true;
+                                break;
+                            }
+                            if (rowNumber != 2 && rowNumber != 3){
+                                System.out.println("Your input is incorrect ");
+                                runDefault = true;
+                                break;
+                            }
+
                             break;
                         }
                     }
@@ -104,6 +159,9 @@ public class Main {
     }
 
     public static void init() throws ClassNotFoundException, SQLException, IOException {
+
+        /*Class.forName("com.mysql.cj.jdbc.Driver");
+        statement.executeUpdate("DROP TABLE TRANSPORT;");*/
 
         Class.forName("com.mysql.cj.jdbc.Driver");
         statement.executeUpdate("CREATE TABLE if not exists TRANSPORT (" +

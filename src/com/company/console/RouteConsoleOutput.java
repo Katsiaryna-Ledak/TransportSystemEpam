@@ -47,8 +47,19 @@ public class RouteConsoleOutput {
             return;
         }
 
-        //routeService.deleteByID(id);
         System.out.println("Route with this ID was deleted");
         routeService.getAll();
+    }
+
+    public void updateRouteByID (Integer id, String userInput, Integer rowNumber) throws SQLException {
+
+        boolean isUpdated = routeService.updateByID(id, userInput,rowNumber);
+        if (isUpdated == false){
+            System.out.println("There is no element with this ID");
+            return;
+        }
+
+        System.out.println("Route with this ID was updated");
+        System.out.println(routeService.get(id));
     }
 }

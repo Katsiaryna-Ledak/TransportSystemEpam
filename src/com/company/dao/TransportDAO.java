@@ -67,4 +67,35 @@ public class TransportDAO {
         }
         return true;
     }
+
+    public boolean updateTransportByID(int id, String userInput, int rowNumber) throws SQLException {
+
+        // if user made a wrong input we can't change the row
+        if (rowNumber != 2 && rowNumber != 3){
+            return false;
+        }
+
+        //search for the row we want to update
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM Transport WHERE id_t = '" + id + "'");
+        resultSet.last();
+        int rsSize = resultSet.getRow();
+
+        // there is no element with such ID
+        if (rsSize == 0){
+            return false;
+        }
+
+        if (rowNumber == 2){
+            int affectedRows = statement.executeUpdate("UPDATE Transport SET type = '" + userInput + "' WHERE id_t = '" + id + "'");
+            if (affectedRows != 0){
+                return true;
+            }
+        } else {
+            int affectedRows = statement.executeUpdate("UPDATE Transport SET model = '" + userInput + "' WHERE id_t = '" + id + "'");
+            if (affectedRows != 0){
+                return true;
+            }
+        }
+        return true;
+    }
 }

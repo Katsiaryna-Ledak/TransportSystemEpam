@@ -49,4 +49,16 @@ public class TransportConsoleOutput {
         System.out.println("Transport with this ID was deleted");
         transportService.getAll();
     }
+
+    public void updateTransportByID (Integer id, String userInput, Integer rowNumber) throws SQLException {
+
+        boolean isUpdated = transportService.updateByID(id, userInput,rowNumber);
+        if (isUpdated == false){
+            System.out.println("There is no element with this ID");
+            return;
+        }
+
+        System.out.println("Transport with this ID was updated");
+        System.out.println(transportService.get(id));
+    }
 }

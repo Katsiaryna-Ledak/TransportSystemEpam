@@ -25,4 +25,9 @@ public class RouteService {
 
         return routeDAO.deleteRoteById(id);
     }
+
+    public boolean updateByID(Integer id, String userInput, int rowNumber) throws SQLException {
+
+        return routeDAO.updateRouteByID(id, userInput, rowNumber);
+    }
 }

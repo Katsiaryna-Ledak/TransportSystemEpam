@@ -36,6 +36,6 @@ public class Route {
     }
 
     public String toString() {
-        return startPoint + " - " + finishPoint;
+        return rid + " " + startPoint + " --> " + finishPoint;
     }
 }

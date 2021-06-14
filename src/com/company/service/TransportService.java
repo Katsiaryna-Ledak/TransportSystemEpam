@@ -24,4 +24,9 @@ public class TransportService {
 
         return transportDAO.deleteTransportById(id);
     }
+
+    public boolean updateByID(Integer id, String userInput, int rowNumber) throws SQLException {
+
+        return transportDAO.updateTransportByID(id, userInput, rowNumber);
+    }
 }

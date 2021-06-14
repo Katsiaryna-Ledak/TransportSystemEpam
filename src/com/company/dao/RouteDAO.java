@@ -67,4 +67,35 @@ public class RouteDAO {
         }
         return true;
     }
+
+    public boolean updateRouteByID(int id, String userInput, int rowNumber) throws SQLException {
+
+        // if user made a wrong input we can't change the row
+        if (rowNumber != 2 && rowNumber != 3){
+            return false;
+        }
+
+        //search for the row we want to update
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM Route WHERE id_r = '" + id + "'");
+        resultSet.last();
+        int rsSize = resultSet.getRow();
+
+        // there is no element with such ID
+        if (rsSize == 0){
+            return false;
+        }
+
+        if (rowNumber == 2){
+            int affectedRows = statement.executeUpdate("UPDATE Route SET startPoint = '" + userInput + "' WHERE id_r = '" + id + "'");
+            if (affectedRows != 0){
+                return true;
+            }
+        } else {
+            int affectedRows = statement.executeUpdate("UPDATE Transport SET finishPoint = '" + userInput + "' WHERE id_r = '" + id + "'");
+            if (affectedRows != 0){
+                return true;
+            }
+        }
+        return true;
+    }
 }
