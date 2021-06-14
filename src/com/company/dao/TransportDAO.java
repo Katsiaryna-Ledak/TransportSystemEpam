@@ -11,7 +11,9 @@ import static com.company.dao.TestConnection.statement;
 
 public class TransportDAO {
 
-    public Set<Transport> getAll() throws SQLException {
+    Transport vehicle = new Transport();
+
+    public Set<Transport> getAllTransport() throws SQLException {
 
         Set<Transport> setOfTransport = new HashSet<Transport>();
 
@@ -23,11 +25,9 @@ public class TransportDAO {
             String typeTransport = resultSet.getString("type");
             String modelTransport = resultSet.getString("model");
 
-            //надо ли каждый раз создавать новый объект?
-            Transport vehicle = new Transport(idTransport, typeTransport, modelTransport);
+            vehicle = new Transport(idTransport, typeTransport, modelTransport);
             setOfTransport.add(vehicle);
         }
-
         return setOfTransport;
     }
 
@@ -39,7 +39,6 @@ public class TransportDAO {
         int rsSize = resultSet.getRow();
 
         if (rsSize == 0){
-            //System.out.println("There is no transport with this ID");
             return null;
         }
 
@@ -48,5 +47,24 @@ public class TransportDAO {
         String modelTransport = resultSet.getString(3);
 
         return new Transport(idTransport, typeTransport, modelTransport);
+    }
+
+    public boolean deleteTransportById(int id) throws SQLException {
+
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM Transport WHERE id_t = '" + id + "'");
+        resultSet.last();
+        int rsSize = resultSet.getRow();
+
+        // there is no element with such ID
+        if (rsSize == 0){
+            return false;
+        }
+
+        int affectedRows = statement.executeUpdate("DELETE FROM Transport WHERE id_t = '" + id + "'");
+        //number of rows affected by the query
+        if (affectedRows != 0){
+            return true;
+        }
+        return true;
     }
 }

@@ -13,8 +13,6 @@ import static com.company.dao.TestConnection.statement;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-	// тут делаем меню через Scanner и вечные циклы
-        // например, 1 - работать с Транспортом, 2 - с Маршрутом
 
         TransportConsoleOutput transportConsoleOutput = new TransportConsoleOutput();
         RouteConsoleOutput routeConsoleOutput = new RouteConsoleOutput();
@@ -23,24 +21,68 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("======================================================================= ");
-            System.out.println("Press 1 to search through TRANSPORT // Press 2 to search through ROUTE: ");
+            System.out.println("Press 1 to work with TRANSPORT table // Press 2 to work with ROUTE table ");
             Integer choise = scanner.nextInt();
 
             boolean runDefault = false;
 
             switch (choise){
                 case 1: {
-                    System.out.println("Please, input Transport ID: ");
-                    Integer transportID = scanner.nextInt();
-                    transportConsoleOutput.outputTransport(transportID);
-                    runDefault = true;
+                    System.out.println("======================================================================= ");
+                    System.out.println("Press 1 to search through TRANSPORT // Press 2 to output all TRANSPORT // Press 3 to delete TRANSPORT by ID ");
+                    int choiseTransport = scanner.nextInt();
+
+                    //In this switch we work with TRANSPORT table
+                    switch (choiseTransport){
+                        case 1: {
+                            System.out.println("Please, input Transport ID: ");
+                            Integer transportID = scanner.nextInt();
+                            transportConsoleOutput.outputTransport(transportID);
+                            runDefault = true;
+                            break;
+                        }
+                        case 2: {
+                            //Data about all TRANSPORT:
+                            transportConsoleOutput.outputAllTransport();
+                            runDefault = true;
+                            break;
+                        }
+                        case 3: {
+                            System.out.println("Please, input Transport ID you want to delete: ");
+                            Integer transportIDDelete = scanner.nextInt();
+                            transportConsoleOutput.deleteTransportByID(transportIDDelete);
+                            runDefault = true;
+                            break;
+                        }
+                    }
                     break;
                 }
                 case 2: {
-                    System.out.println("Please, input Route ID: ");
-                    Integer routeID = scanner.nextInt();
-                    routeConsoleOutput.outputRoute(routeID);
-                    runDefault = true;
+                    System.out.println("======================================================================= ");
+                    System.out.println("Press 1 to search through ROUTE // Press 2 to output all ROUTES // Press 3 to delete ROUTE by ID ");
+                    int choiseRoute = scanner.nextInt();
+                    switch (choiseRoute){
+                        case 1: {
+                            System.out.println("Please, input Route ID: ");
+                            Integer routeID = scanner.nextInt();
+                            routeConsoleOutput.outputRoute(routeID);
+                            runDefault = true;
+                            break;
+                        }
+                        case 2: {
+                            //Data about all ROUTES:
+                            routeConsoleOutput.outputAllRoutes();
+                            runDefault = true;
+                            break;
+                        }
+                        case 3: {
+                            System.out.println("Please, input Route ID you want to delete: ");
+                            Integer routeIDDelete = scanner.nextInt();
+                            routeConsoleOutput.deleteRouteByID(routeIDDelete);
+                            runDefault = true;
+                            break;
+                        }
+                    }
                     break;
                 }
                 default: {
@@ -69,11 +111,11 @@ public class Main {
                 "type varchar(15) not null," +
                 "model varchar(15) not null);");
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        statement.executeUpdate("DROP TABLE ROUTE;");
+        /*Class.forName("com.mysql.cj.jdbc.Driver");
+        statement.executeUpdate("DROP TABLE ROUTE;");*/
 
         Class.forName("com.mysql.cj.jdbc.Driver");
-        statement.executeUpdate("CREATE TABLE ROUTE (" +
+        statement.executeUpdate("CREATE TABLE if not exists ROUTE (" +
                 "id_r INT(11) NOT NULL AUTO_INCREMENT primary key," +
                 "startPoint varchar(15) not null," +
                 "finishPoint varchar(15) not null);");
@@ -85,5 +127,7 @@ public class Main {
         //statement.executeUpdate("DELETE FROM TRANSPORT WHERE id_t = 2");
 
         //statement.executeUpdate("INSERT INTO ROUTE (id_r, startPoint, finishPoint) value (1, 'Parnas', 'Ozerki');");
+        //statement.executeUpdate("INSERT INTO ROUTE (id_r, startPoint, finishPoint) value (2, 'Minsk', 'Brest');");
+        //statement.executeUpdate("INSERT INTO ROUTE (id_r, startPoint, finishPoint) value (3, 'Zvezdnaya', 'Nevsliy Ave');");
     }
 }

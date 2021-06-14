@@ -17,6 +17,11 @@ public class TransportService {
 
     public Set<Transport> getAll() throws SQLException {
 
-        return transportDAO.getAll();
+        return transportDAO.getAllTransport();
+    }
+
+    public boolean deleteByID(Integer id) throws SQLException {
+
+        return transportDAO.deleteTransportById(id);
     }
 }

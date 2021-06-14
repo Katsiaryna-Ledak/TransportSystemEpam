@@ -6,11 +6,17 @@ public class Transport {
     private String type;
     private String model;
 
+    public Transport(){
+        super();
+    }
+
     public Transport(int id, String type, String model) {
         this.tid = id;
         this.type = type;
         this.model = model;
     }
+
+    public int getID() { return tid; }
 
     public String getType() {
         return type;

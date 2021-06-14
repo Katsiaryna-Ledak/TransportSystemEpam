@@ -6,6 +6,10 @@ public class Route {
     private String startPoint;
     private String finishPoint;
 
+    public Route(){
+        super();
+    }
+
     public Route(int id, String start, String finish){
 
         this.rid = id;
@@ -13,7 +17,7 @@ public class Route {
         this.finishPoint = finish;
     }
 
-    public int getRid() { return rid; }
+    public int getRouteid() { return rid; }
 
     public String getStart() {
         return startPoint;

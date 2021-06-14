@@ -4,6 +4,7 @@ import com.company.dao.RouteDAO;
 import com.company.domain.Route;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 
 public class RouteService {
@@ -13,5 +14,15 @@ public class RouteService {
     public Route get(Integer id) throws SQLException {
 
         return routeDAO.getRouteById(id);
+    }
+
+    public Set<Route> getAll() throws SQLException {
+
+        return routeDAO.getAllRoutes();
+    }
+
+    public boolean deleteByID(Integer id) throws SQLException {
+
+        return routeDAO.deleteRoteById(id);
     }
 }
