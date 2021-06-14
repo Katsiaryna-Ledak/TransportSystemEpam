@@ -10,6 +10,11 @@ public class TransportConsoleOutput {
 
     public void outputTransport(Integer id) throws SQLException {
 
+        if (transportService.get(id) == null){
+            System.out.println("There is no transport with this ID");
+            return;
+        }
+        System.out.println("Data about chosen transport: ");
         System.out.println(transportService.get(id));
     }
 

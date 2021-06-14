@@ -26,13 +26,13 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="9845cbd6-0b06-4dd3-b050-ead4a84bcbe5">
-        <schema name="mysql" object-types="table, view, function, column" />
+        <schema name="mysql" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="9845cbd6-0b06-4dd3-b050-ead4a84bcbe5">
-      <console name="TransportDB" type="STANDARD" schema="mysql" session="Main"><![CDATA[select * from Transport;]]></console>
+      <console name="TransportDB" type="STANDARD" schema="mysql" session="Main"><![CDATA[select * from route;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

@@ -12,7 +12,7 @@ public class TransportService {
 
     public Transport get(Integer id) throws SQLException {
 
-        return transportDAO.get(id);
+        return transportDAO.getTransportById(id);
     }
 
     public Set<Transport> getAll() throws SQLException {

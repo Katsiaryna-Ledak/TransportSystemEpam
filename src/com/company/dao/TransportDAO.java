@@ -31,12 +31,17 @@ public class TransportDAO {
         return setOfTransport;
     }
 
-    public Transport get(int id) throws SQLException {
+    public Transport getTransportById(int id) throws SQLException {
 
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Transport WHERE id_t = '" + id + "'");
 
         resultSet.last();
         int rsSize = resultSet.getRow();
+
+        if (rsSize == 0){
+            //System.out.println("There is no transport with this ID");
+            return null;
+        }
 
         int idTransport = resultSet.getInt(1);
         String typeTransport = resultSet.getString(2);
