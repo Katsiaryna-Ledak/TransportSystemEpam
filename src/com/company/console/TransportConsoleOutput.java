@@ -61,4 +61,15 @@ public class TransportConsoleOutput {
         System.out.println("Transport with this ID was updated");
         System.out.println(transportService.get(id));
     }
+
+    public void createTransport (Transport transport) throws SQLException {
+
+        boolean isCreated = transportService.create(transport);
+        if (isCreated == false){
+            System.out.println("The item was not created");
+            return;
+        }
+
+        System.out.println("Transport was created and added to DB");
+    }
 }

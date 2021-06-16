@@ -22,8 +22,7 @@ public class TestConnection {
 
     static {
         try {
-            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            //statement = connection.createStatement();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         }
         catch (SQLException throwables){
             throwables.printStackTrace();

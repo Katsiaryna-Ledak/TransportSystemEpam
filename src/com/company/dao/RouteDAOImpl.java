@@ -10,11 +10,11 @@ import java.util.Set;
 
 import static com.company.dao.TestConnection.statement;
 
-public class RouteDAO {
+public class RouteDAOImpl implements RouteDAO<Route> {
 
     Route pathway = new Route();
 
-    public Route getRouteById(Integer id) throws SQLException {
+    public Route getByID(Integer id) throws SQLException {
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Route WHERE id_r = '" + id + "'");
 
         resultSet.last();
@@ -31,7 +31,7 @@ public class RouteDAO {
         return new Route(idRoute, startPoint, finishPoint);
     }
 
-    public Set<Route> getAllRoutes() throws SQLException {
+    public Set<Route> getAll() throws SQLException {
 
         Set<Route> setOfRoutes = new HashSet<Route>();
 
@@ -49,7 +49,7 @@ public class RouteDAO {
         return setOfRoutes;
     }
 
-    public boolean deleteRoteById(int id) throws SQLException {
+    public boolean deleteByID(Integer id) throws SQLException {
 
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Route WHERE id_r = '" + id + "'");
         resultSet.last();
@@ -68,7 +68,7 @@ public class RouteDAO {
         return true;
     }
 
-    public boolean updateRouteByID(int id, String userInput, int rowNumber) throws SQLException {
+    public boolean updateByID(Integer id, String userInput, Integer rowNumber) throws SQLException {
 
         // if user made a wrong input we can't change the row
         if (rowNumber != 2 && rowNumber != 3){
@@ -91,11 +91,34 @@ public class RouteDAO {
                 return true;
             }
         } else {
-            int affectedRows = statement.executeUpdate("UPDATE Transport SET finishPoint = '" + userInput + "' WHERE id_r = '" + id + "'");
+            int affectedRows = statement.executeUpdate("UPDATE Route SET finishPoint = '" + userInput + "' WHERE id_r = '" + id + "'");
             if (affectedRows != 0){
                 return true;
             }
         }
         return true;
+    }
+
+    public boolean create(Route userRoute) throws SQLException {
+
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM Route");
+        resultSet.last();
+        int rsSize = resultSet.getRow();
+
+        resultSet.moveToInsertRow();
+        resultSet.updateInt(1, rsSize + 1);
+        resultSet.updateString(2, userRoute.getStart());
+        resultSet.updateString(3, userRoute.getFinish());
+        resultSet.insertRow();
+
+        ResultSet rsAfterAdding = statement.executeQuery("SELECT * FROM Route");
+        rsAfterAdding.last();
+        int rsSizeAfterAdding = rsAfterAdding.getRow();
+
+        if (rsSizeAfterAdding > rsSize) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

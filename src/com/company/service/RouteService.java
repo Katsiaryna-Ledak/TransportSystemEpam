@@ -1,7 +1,8 @@
 package com.company.service;
 
-import com.company.dao.RouteDAO;
+import com.company.dao.RouteDAOImpl;
 import com.company.domain.Route;
+import com.company.domain.Transport;
 
 import java.sql.SQLException;
 import java.util.Set;
@@ -9,25 +10,30 @@ import java.util.Set;
 
 public class RouteService {
 
-    RouteDAO routeDAO = new RouteDAO();
+    RouteDAOImpl routeDAOImpl = new RouteDAOImpl();
 
     public Route get(Integer id) throws SQLException {
 
-        return routeDAO.getRouteById(id);
+        return routeDAOImpl.getByID(id);
     }
 
     public Set<Route> getAll() throws SQLException {
 
-        return routeDAO.getAllRoutes();
+        return routeDAOImpl.getAll();
     }
 
     public boolean deleteByID(Integer id) throws SQLException {
 
-        return routeDAO.deleteRoteById(id);
+        return routeDAOImpl.deleteByID(id);
     }
 
-    public boolean updateByID(Integer id, String userInput, int rowNumber) throws SQLException {
+    public boolean updateByID(Integer id, String userInput, Integer rowNumber) throws SQLException {
 
-        return routeDAO.updateRouteByID(id, userInput, rowNumber);
+        return routeDAOImpl.updateByID(id, userInput, rowNumber);
+    }
+
+    public boolean create(Route route) throws SQLException {
+
+        return routeDAOImpl.create(route);
     }
 }

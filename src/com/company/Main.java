@@ -2,6 +2,8 @@ package com.company;
 
 import com.company.console.RouteConsoleOutput;
 import com.company.console.TransportConsoleOutput;
+import com.company.domain.Route;
+import com.company.domain.Transport;
 
 
 import java.io.IOException;
@@ -30,7 +32,7 @@ public class Main {
             switch (choise){
                 case 1: {
                     System.out.println("======================================================================= ");
-                    System.out.println("Press 1 to search through TRANSPORT // Press 2 to output all TRANSPORT\nPress 3 to delete TRANSPORT by ID // Press 4 to update one row in TRANSPORT ");
+                    System.out.println("Press 1 to search through TRANSPORT // Press 2 to output all TRANSPORT\nPress 3 to delete TRANSPORT by ID   // Press 4 to update one row in TRANSPORT\nPress 5 to add new TRANSPORT ");
                     int choiseTransport = scanner.nextInt();
 
                     //In this switch we work with TRANSPORT table
@@ -82,12 +84,22 @@ public class Main {
 
                             break;
                         }
+                        case 5: {
+                            System.out.println("Please, enter new transport TYPE: ");
+                            String userInputType = sc.nextLine();
+                            System.out.println("Please, enter new transport MODEL: ");
+                            String userInputModel = sc.nextLine();
+                            Transport userCreation = new Transport(0, userInputType, userInputModel);
+                            transportConsoleOutput.createTransport(userCreation);
+                            runDefault = true;
+                            break;
+                        }
                     }
                     break;
                 }
                 case 2: {
                     System.out.println("======================================================================= ");
-                    System.out.println("Press 1 to search through ROUTE // Press 2 to output all ROUTES\nPress 3 to delete ROUTE by ID // Press 4 to update one row in ROUTE ");
+                    System.out.println("Press 1 to search through ROUTE // Press 2 to output all ROUTES\nPress 3 to delete ROUTE by ID   // Press 4 to update one row in ROUTE\nPress 5 to add new ROUTE ");
                     int choiseRoute = scanner.nextInt();
                     switch (choiseRoute){
                         case 1: {
@@ -118,7 +130,7 @@ public class Main {
                             if (rowNumber == 2){
                                 System.out.println("Please, enter new transport START: ");
                                 String userInput = sc.nextLine();
-                                transportConsoleOutput.updateTransportByID(routeIDUpdate, userInput, rowNumber);
+                                routeConsoleOutput.updateRouteByID(routeIDUpdate, userInput, rowNumber);
                                 runDefault = true;
                                 break;
                             }
@@ -134,7 +146,16 @@ public class Main {
                                 runDefault = true;
                                 break;
                             }
-
+                            break;
+                        }
+                        case 5: {
+                            System.out.println("Please, enter new start of the ROUTE: ");
+                            String userInputStart = sc.nextLine();
+                            System.out.println("Please, enter new finish of the Route: ");
+                            String userInputFinish = sc.nextLine();
+                            Route userCreation = new Route(0, userInputStart, userInputFinish);
+                            routeConsoleOutput.createRoute(userCreation);
+                            runDefault = true;
                             break;
                         }
                     }
@@ -154,7 +175,6 @@ public class Main {
                     continue;
                 } else return;
             }
-
         }
     }
 
@@ -175,8 +195,8 @@ public class Main {
         Class.forName("com.mysql.cj.jdbc.Driver");
         statement.executeUpdate("CREATE TABLE if not exists ROUTE (" +
                 "id_r INT(11) NOT NULL AUTO_INCREMENT primary key," +
-                "startPoint varchar(15) not null," +
-                "finishPoint varchar(15) not null);");
+                "startPoint varchar(20) not null," +
+                "finishPoint varchar(20) not null);");
 
         //statement.executeUpdate("INSERT INTO TRANSPORT (id_t, type, model) value (1, 'TRAM', 'TZXX');");
         //statement.executeUpdate("INSERT INTO TRANSPORT (id_t, type, model) value (2, 'BUS', 'Ikarus');");

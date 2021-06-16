@@ -62,4 +62,15 @@ public class RouteConsoleOutput {
         System.out.println("Route with this ID was updated");
         System.out.println(routeService.get(id));
     }
+
+    public void createRoute (Route route) throws SQLException {
+
+        boolean isCreated = routeService.create(route);
+        if (isCreated == false){
+            System.out.println("The item was not created");
+            return;
+        }
+
+        System.out.println("Route was created and added to DB");
+    }
 }
