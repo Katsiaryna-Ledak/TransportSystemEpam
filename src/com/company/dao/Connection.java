@@ -2,13 +2,13 @@ package com.company.dao;
 
 import java.sql.*;
 
-public class TestConnection {
+public class Connection {
 
     public static final String USER_NAME = "root";
     public static final String PASSWORD = "root";
     public static final String URL = "jdbc:mysql://localhost:3306/mysql";
     public static Statement statement;
-    public static Connection connection;
+    public static java.sql.Connection connection;
 
     static {
         try {

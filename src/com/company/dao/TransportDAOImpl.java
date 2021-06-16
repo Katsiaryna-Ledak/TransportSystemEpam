@@ -2,15 +2,12 @@ package com.company.dao;
 
 import com.company.domain.Transport;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.company.dao.TestConnection.statement;
-import static com.company.dao.TestConnection.connection;
+import static com.company.dao.Connection.statement;
 
 public class TransportDAOImpl implements TransportDAO<Transport> {
 

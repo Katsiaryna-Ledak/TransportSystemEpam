@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import static com.company.dao.TestConnection.statement;
+import static com.company.dao.Connection.statement;
 
 public class Main {
 
@@ -23,7 +23,7 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
             Scanner sc = new Scanner(System.in); // for STRING
 
-            System.out.println("======================================================================= ");
+            System.out.println("==========WELCOME TO TRANSPORT SYSTEM==================================\n");
             System.out.println("Press 1 to work with TRANSPORT table // Press 2 to work with ROUTE table ");
             Integer choise = scanner.nextInt();
 
@@ -31,7 +31,7 @@ public class Main {
 
             switch (choise){
                 case 1: {
-                    System.out.println("======================================================================= ");
+                    System.out.println("==========TRANSPORT==================================================== ");
                     System.out.println("Press 1 to search through TRANSPORT // Press 2 to output all TRANSPORT\nPress 3 to delete TRANSPORT by ID   // Press 4 to update one row in TRANSPORT\nPress 5 to add new TRANSPORT ");
                     int choiseTransport = scanner.nextInt();
 
@@ -98,7 +98,7 @@ public class Main {
                     break;
                 }
                 case 2: {
-                    System.out.println("======================================================================= ");
+                    System.out.println("==========ROUTE======================================================== ");
                     System.out.println("Press 1 to search through ROUTE // Press 2 to output all ROUTES\nPress 3 to delete ROUTE by ID   // Press 4 to update one row in ROUTE\nPress 5 to add new ROUTE ");
                     int choiseRoute = scanner.nextInt();
                     switch (choiseRoute){
@@ -198,6 +198,17 @@ public class Main {
                 "startPoint varchar(20) not null," +
                 "finishPoint varchar(20) not null);");
 
+        /*Class.forName("com.mysql.cj.jdbc.Driver");
+        statement.executeUpdate("DROP TABLE TRANSPORT_ROUTE_RELATION;");*/
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        statement.executeUpdate("CREATE TABLE if not exists TRANSPORT_ROUTE_RELATION (" +
+                "id_relation INT(11) NOT NULL AUTO_INCREMENT primary key," +
+                "id_t INT(11)," +
+                "id_r INT(11)," +
+                "foreign key(id_t) references Transport(id_t),"+
+                "foreign key(id_r) references Route(id_r));");
+
         //statement.executeUpdate("INSERT INTO TRANSPORT (id_t, type, model) value (1, 'TRAM', 'TZXX');");
         //statement.executeUpdate("INSERT INTO TRANSPORT (id_t, type, model) value (2, 'BUS', 'Ikarus');");
         //statement.executeUpdate("INSERT INTO TRANSPORT (id_t, type, model) value (3, 'TROLLEYBUS', 'MAZ');");
@@ -207,5 +218,12 @@ public class Main {
         //statement.executeUpdate("INSERT INTO ROUTE (id_r, startPoint, finishPoint) value (1, 'Parnas', 'Ozerki');");
         //statement.executeUpdate("INSERT INTO ROUTE (id_r, startPoint, finishPoint) value (2, 'Minsk', 'Brest');");
         //statement.executeUpdate("INSERT INTO ROUTE (id_r, startPoint, finishPoint) value (3, 'Zvezdnaya', 'Nevsliy Ave');");
+
+        //statement.executeUpdate("INSERT INTO TRANSPORT_ROUTE_RELATION (id_relation, id_t, id_r) value (1, 1, 3);");
+        //statement.executeUpdate("INSERT INTO TRANSPORT_ROUTE_RELATION (id_relation, id_t, id_r) value (2, 2, 2);");
+        //statement.executeUpdate("INSERT INTO TRANSPORT_ROUTE_RELATION (id_relation, id_t, id_r) value (3, 2, 4);");
+        //statement.executeUpdate("INSERT INTO TRANSPORT_ROUTE_RELATION (id_relation, id_t, id_r) value (4, 3, 1);");
+
+
     }
 }

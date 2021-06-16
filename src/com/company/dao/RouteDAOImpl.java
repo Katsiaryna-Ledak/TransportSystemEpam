@@ -1,14 +1,13 @@
 package com.company.dao;
 
 import com.company.domain.Route;
-import com.company.domain.Transport;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.company.dao.TestConnection.statement;
+import static com.company.dao.Connection.statement;
 
 public class RouteDAOImpl implements RouteDAO<Route> {
 
