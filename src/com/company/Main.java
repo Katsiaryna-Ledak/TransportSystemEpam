@@ -166,7 +166,7 @@ public class Main {
                 }
                 case 3: {
                     System.out.println("==========  RELATION  ===================================================== ");
-                    System.out.println("Press 1 to search through RELATION // Press 2 to output all TRANSPORT for certain RELATION\nPress 3 to output just all the RELATIONS // Press 4 to add new RELATION\nPress 5 to delete RELATION // Press 6 to update RELATION");
+                    System.out.println("Press 1 to search through RELATION // Press 2 to output all TRANSPORT for certain RELATION\nPress 3 to output just all the RELATIONS   // Press 4 to add new RELATION\nPress 5 to delete RELATION // Press 6 to update RELATION");
                     int choiseRelation = scanner.nextInt();
                     switch (choiseRelation) {
                         case 1: {
