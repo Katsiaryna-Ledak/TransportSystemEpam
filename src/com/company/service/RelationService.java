@@ -23,6 +23,11 @@ public class RelationService {
         return relationDAOImpl.getAll();
     }
 
+    public Set<TransportRouteRelation> getAllRelationForOneRoute(Integer idRoute) throws SQLException {
+
+        return relationDAOImpl.getAllTransportOfTheRoute(idRoute);
+    }
+
     public boolean deleteByID(Integer id) throws SQLException {
 
         return relationDAOImpl.deleteByID(id);
@@ -30,9 +35,12 @@ public class RelationService {
 
     public boolean updateByID(Integer idRel, String idTran, Integer idRoute) throws SQLException {
 
-        //не забыть преобразовать параметра String idTran в Integer
-
         return relationDAOImpl.updateByID(idRel, idTran, idRoute);
+    }
+
+    public boolean updateRelationByID(Integer idRel, Integer userInput, Integer rowNumber) throws SQLException {
+
+        return relationDAOImpl.updateRelationByID(idRel, userInput, rowNumber);
     }
 
     public boolean create(TransportRouteRelation relation) throws SQLException {

@@ -35,6 +35,6 @@ public class TransportRouteRelation {
     }
 
     public String toString() {
-        return "Relation " + relationID + ": Transport ID = " + transportID + ", Route ID = " + routeID;
+        return "Relation " + relationID + ": Route ID:" + routeID + " <==> Transport ID = " + transportID;
     }
 }
